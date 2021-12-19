@@ -1,0 +1,12 @@
+# syntax=docker/dockerfile:1
+FROM golang:1.18-rc-alpine AS build
+
+RUN apk add --update build-base git;
+
+WORKDIR ${GOPATH}/app/
+
+COPY *.go ./
+COPY go.mod ./
+COPY go.sum ./
+
+CMD ["go","test","-v"]
